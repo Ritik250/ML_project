@@ -72,7 +72,7 @@ class DataTransformation:
             input_feature_test_arr=preporocessor_obj.transform(input_featrue_test_df)
 
             train_array=np.c_[
-                input_featrue_train_df,np.array(target_feature_train_df)
+                input_feature_train_arr,np.array(target_feature_train_df)
             ]
             test_array=np.c_[input_feature_test_arr,np.array(target_feature_test_df)]
 
