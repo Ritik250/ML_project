@@ -6,6 +6,5 @@ catboost==1.2.10
 xgboost==2.1.4
 dill==0.4.0
 Flask==3.0.3
-gunicorn
-
+gunicorn==23.0.0
 # -e .
