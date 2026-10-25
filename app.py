@@ -1,13 +1,13 @@
 
 import traceback
 from flask import Flask, request, render_template
+from markupsafe import escape
 from src.pipeline.predict_pipeline import CustomData, PredictPipeline
 
 application = Flask(__name__)
 app = application
 
 
-# Route for homepage
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -45,8 +45,15 @@ def predict_datapoint():
         return render_template('home.html', results=results[0])
 
     except Exception:
-        app.logger.exception("PREDICTION FAILED")
-        raise
+        error_details = traceback.format_exc()
+        app.logger.error("PREDICTION FAILED:\n%s", error_details)
+
+        return (
+            "<h2>Prediction failed</h2>"
+            "<p>Please share this error with the developer:</p>"
+            f"<pre>{escape(error_details)}</pre>",
+            500
+        )
 
 
 if __name__ == "__main__":
